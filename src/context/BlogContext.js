@@ -12,11 +12,19 @@ const blogReducer = (state, action) => {
           content: action.payload.content,
         },
       ];
+    case "DELETE_BLOG":
+      return state.filter((item) => item?.id !== action.payload.id);
+    case "EDIT_BLOG":
+      return state.map((item) =>
+        item?.id === action.payload.id
+          ? { id, title: action.payload.title, content: action.payload.content }
+          : item
+      );
     default:
       return state;
   }
 };
-// create context provider
+// add to blog action helper function
 const addToBlogPost = (dispatch) => {
   // use state way ----->
   // setBlogPosts([
@@ -29,8 +37,18 @@ const addToBlogPost = (dispatch) => {
   return (title, content) =>
     dispatch({ type: "ADD_BLOG", payload: { title, content } });
 };
+// delete blog action helper function
+const deleteBlog = (dispatch) => {
+  return (id) => dispatch({ type: "DELETE_BLOG", payload: { id } });
+};
+// Edit blog action helper function
+const editBlog = (dispatch) => {
+  return (id, title, content) =>
+    dispatch({ type: "EDIT_BLOG", payload: { id, title, content } });
+};
+// export Context and Provider from addBlogContext
 export const { Context, Provider } = addPostContext(
   blogReducer,
-  { addToBlogPost },
+  { addToBlogPost, deleteBlog, editBlog },
   [{ id: uuidv4(), title: "Initial Title", context: "Initial Content" }]
 );
