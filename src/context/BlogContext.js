@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import addPostContext from "./addPostContext";
 // Create reducer function
@@ -50,5 +51,5 @@ const editBlog = (dispatch) => {
 export const { Context, Provider } = addPostContext(
   blogReducer,
   { addToBlogPost, deleteBlog, editBlog },
-  [{ id: uuidv4(), title: "Initial Title", context: "Initial Content" }]
+  [{ id: uuidv4(), title: "Initial Title", content: "Initial Content" }]
 );
