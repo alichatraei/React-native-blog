@@ -5,6 +5,7 @@ import Home from "./src/Screens/Home";
 import { Provider } from "./src/context/BlogContext";
 import ShowBlog from "./src/Screens/ShowBlog";
 import AddBlog from "./src/Screens/AddBlog";
+import EditBlog from "./src/Screens/EditBlog";
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <Stack.Screen name="home" component={Home} />
           <Stack.Screen name="showBlog" component={ShowBlog} />
           <Stack.Screen name="addBlog" component={AddBlog} />
+          <Stack.Screen name="editBlog" component={EditBlog} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -35,8 +35,11 @@ const addToBlogPost = (dispatch) => {
   // ----> use reducer way
   // dispatch({ type: "ADD_BLOG", payload: title });
   // return function
-  return (title, content) =>
+  return (title, content, callback) => {
+    console.log(title, content);
     dispatch({ type: "ADD_BLOG", payload: { title, content } });
+    callback();
+  };
 };
 // delete blog action helper function
 const deleteBlog = (dispatch) => {

@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { Pressable, Text, View } from "react-native";
 import { Context } from "../../context/BlogContext";
-const ShowBlog = ({ route }) => {
+import { AntDesign } from "@expo/vector-icons";
+const ShowBlog = ({ route, navigation }) => {
   const {
     params: { id },
   } = route;
@@ -17,6 +18,15 @@ const ShowBlog = ({ route }) => {
   useEffect(() => {
     findBlog();
   }, [id]);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable onPress={() => navigation.navigate("editBlog", { id })}>
+          <AntDesign name="edit" size={24} color="black" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   return (
     <View>
       <Text>{`Title : ${title}`}</Text>
